@@ -1,11 +1,7 @@
 {
   "hosting": {
-    "public": "dist/apps/olvertowe",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "public": "dist/apps/olivertowe",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
