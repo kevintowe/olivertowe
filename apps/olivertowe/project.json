@@ -1,0 +1,89 @@
+{
+  "name": "olivertowe",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/olivertowe/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/olivertowe",
+        "index": "apps/olivertowe/src/index.html",
+        "baseHref": "/",
+        "main": "apps/olivertowe/src/main.tsx",
+        "tsConfig": "apps/olivertowe/tsconfig.app.json",
+        "assets": [
+          "apps/olivertowe/src/favicon.ico",
+          "apps/olivertowe/src/assets"
+        ],
+        "styles": ["apps/olivertowe/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "apps/olivertowe/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/olivertowe/src/environments/environment.ts",
+              "with": "apps/olivertowe/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "olivertowe:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "olivertowe:build:development"
+        },
+        "production": {
+          "buildTarget": "olivertowe:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/olivertowe/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/olivertowe/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
